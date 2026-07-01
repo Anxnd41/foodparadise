@@ -1,0 +1,129 @@
+/* ─────────────────────────────────────────
+   Photo Gallery  –  matches reference layout
+   Grid: 2fr 1fr 1fr  ×  2 equal rows
+   ───────────────────────────────────────── */
+
+/* Section wrapper – full bleed, no padding */
+#gallery {
+    width: 100%;
+    overflow: hidden;
+}
+
+/* ── Grid ── */
+.photo-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: repeat(2, 340px);
+    gap: 3px;
+    background: #1a1a1a; /* gap colour shows as dark seam between tiles */
+}
+
+/* ── Photo tiles ── */
+.gallery-item {
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.55s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.07);
+}
+
+/* ── Gallery info card (tan tile) ── */
+.gallery-card {
+    background: #c4a47b;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+
+/* Short decorative line above heading */
+.gallery-card-line {
+    display: block;
+    width: 36px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.70);
+    margin-bottom: 22px;
+}
+
+/* "Photo / Gallery" heading */
+.gallery-card h2 {
+    font-family: "Cormorant Garamond", "Georgia", "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 52px;
+    line-height: 1.18;
+    text-align: center;
+    letter-spacing: 0.5px;
+    margin: 0 0 30px 0;
+    text-transform: capitalize;
+}
+
+/* Circular arrow button */
+.arrow-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.88);
+    color: #8a6540;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.25s ease, transform 0.25s ease;
+    flex-shrink: 0;
+}
+
+.arrow-btn:hover {
+    background: #fff;
+    transform: scale(1.12);
+}
+
+.arrow-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 992px) {
+    .photo-gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+    }
+
+    .gallery-item,
+    .gallery-card {
+        height: 260px;
+    }
+
+    .gallery-card h2 {
+        font-size: 38px;
+    }
+}
+
+@media (max-width: 600px) {
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item,
+    .gallery-card {
+        height: 240px;
+    }
+
+    .gallery-card h2 {
+        font-size: 34px;
+    }
+}
