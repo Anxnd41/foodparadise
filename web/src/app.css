@@ -251,13 +251,13 @@ select {
 
 .sections-grid {
 	display: grid;
-	grid-template-columns: repeat(12, minmax(0, 1fr));
+	grid-template-columns: 1fr;
 	gap: 1rem;
 }
 
 .content-section,
 .site-footer {
-	grid-column: span 6;
+	grid-column: span 1;
 	padding: 1.3rem;
 	border-radius: 24px;
 	border: 1px solid var(--border);
@@ -286,23 +286,23 @@ select {
 }
 
 #menu {
-	grid-column: span 5;
+	grid-column: 1 / -1;
 }
 
 #gallery {
-	grid-column: span 7;
+	grid-column: 1 / -1;
 }
 
 #location {
-	grid-column: span 4;
+	grid-column: 1 / -1;
 }
 
 .review-section {
-	grid-column: span 4;
+	grid-column: 1 / -1;
 }
 
 #contact {
-	grid-column: span 4;
+	grid-column: 1 / -1;
 }
 
 .site-footer {
