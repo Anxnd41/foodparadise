@@ -9,16 +9,18 @@ import Footer from "./component/footer";
 
 function App() {
   return (
-    <>
+    <main className="page-shell">
       <Navbar />
       <Home />
-      <Menu />
-      <PhotoGallery />
-      <Location />
-      <Review />
-      <Contact />
+      <div className="sections-grid">
+        <Menu />
+        <PhotoGallery />
+        <Location />
+        <Review />
+        <Contact />
+      </div>
       <Footer />
-    </>
+    </main>
   );
 }
 
