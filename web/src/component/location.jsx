@@ -1,10 +1,16 @@
-function Location() {
-	return (
-		<section id="location" className="content-section">
-			<h2>Location</h2>
-			<p>Visit us at a convenient neighborhood spot with easy access.</p>
-		</section>
-	);
-}
+import OutletCard from "./Outletcard";
+import outlets from "../data/outlets";
+
+const Location = () => {
+  return (
+    <section id="location">
+      <div className="location-section">
+        {outlets.map(outlet => (
+          <OutletCard key={outlet.id} outlet={outlet} />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default Location;
