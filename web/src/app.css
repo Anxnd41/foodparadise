@@ -63,131 +63,115 @@ select {
 	max-width: none;
 }
 
+/* ═══════════════════════════════════════════
+   NAVBAR  –  transparent absolute overlay
+   Layout: [left-nav] [circle-logo] [right-nav]
+   ═══════════════════════════════════════════ */
+
 .site-header {
-	position: sticky;
+	position: absolute;
 	top: 0;
-	z-index: 20;
+	left: 0;
+	right: 0;
+	z-index: 100;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	gap: 2rem;
-	padding: 3rem 3rem 1.5rem;
-	border: none;
-	border-radius: 0;
+	padding: 0 clamp(2rem, 4vw, 5rem);
+	height: 160px; /* room for the circle to breathe */
 	background: transparent;
-	backdrop-filter: none;
+	border: none;
 	box-shadow: none;
-	margin-top: 0;
 }
 
+/* ── Centred logo badge ── */
 .site-brand-center {
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 21;
-	padding: 0;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 101;
 }
 
-.brand-circle {
+/* ── Logo image ── */
+.brand-logo-link {
+	display: block;
+	line-height: 0; /* kill inline gap */
+}
+
+.brand-logo-img {
 	width: 180px;
 	height: 180px;
-	border-radius: 50%;
-	border: 3px dotted rgba(255, 255, 255, 0.8);
-	background: transparent;
-	backdrop-filter: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: none;
+	object-fit: contain;
+	/* The logo PNG has a black background.
+	   mix-blend-mode: screen makes black = transparent
+	   so only the white artwork shows over the hero. */
+	mix-blend-mode: screen;
+	transition: transform 0.35s ease, opacity 0.35s ease;
+	opacity: 0.92;
 }
 
-.brand-text {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-	gap: 0.25rem;
+.brand-logo-link:hover .brand-logo-img {
+	transform: scale(1.05);
+	opacity: 1;
 }
 
-.brand-name {
-	font-size: 1.4rem;
-	font-weight: 700;
-	letter-spacing: 0.08em;
-	color: #ffffff;
-	text-transform: uppercase;
-	line-height: 1.1;
-	font-family: "Cinzel", serif;
-}
 
-.brand-tagline {
-	font-size: 0.75rem;
-	color: rgba(255, 255, 255, 0.85);
-	letter-spacing: 0.1em;
-	font-weight: 400;
-}
-
-.brand-est {
-	font-size: 0.65rem;
-	color: rgba(255, 255, 255, 0.7);
-	letter-spacing: 0.15em;
-	margin-top: 0.15rem;
-}
-
-.site-brand {
-	font-size: 1.05rem;
-	font-weight: 800;
-	letter-spacing: -0.04em;
-	white-space: nowrap;
-}
-
+/* ── Nav links (both sides) ── */
 .site-nav {
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
+	gap: clamp(1rem, 1.2vw, 1.75rem);
 	flex-wrap: nowrap;
+	min-width: 0;
 }
 
-.site-nav-left {
-	justify-content: flex-end;
-	flex: 1;
-}
-
-.site-nav-right {
-	justify-content: flex-start;
-	flex: 1;
-}
+.site-nav-left  { justify-content: flex-end;   flex: 1; min-width: 0; padding-right: clamp(4rem, 9vw, 6.5rem); }
+.site-nav-right { justify-content: flex-start;  flex: 1; min-width: 0; padding-left: clamp(4rem, 9vw, 6.5rem); }
 
 .site-nav a {
+	position: relative;
 	display: inline-flex;
 	align-items: center;
-	justify-content: center;
-	padding: 0.5rem 0.75rem;
-	border-radius: 0;
-	color: rgba(255, 255, 255, 0.9);
-	font-size: 0.95rem;
+	padding: 0.45rem 0.95rem;
+	color: rgba(255, 255, 255, 0.88);
+	font-size: 0.78rem;
 	font-weight: 600;
-	letter-spacing: 0.08em;
+	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	transition: color 0.3s ease;
 	white-space: nowrap;
-}
-
-.site-nav a:hover {
+	transition: color 0.25s ease;
+	border-radius: 0;
 	background: transparent;
-	color: var(--accent-strong);
-	transform: none;
 }
 
+/* animated underline on hover */
+.site-nav a::after {
+	content: "";
+	position: absolute;
+	bottom: 2px;
+	left: 0.9rem;
+	right: 0.9rem;
+	height: 1px;
+	background: rgba(255, 255, 255, 0.8);
+	transform: scaleX(0);
+	transform-origin: center;
+	transition: transform 0.25s ease;
+}
+
+.site-nav a:hover { color: #fff; }
+.site-nav a:hover::after { transform: scaleX(1); }
+
+/* Reserve CTA — same as other links, no special styling needed */
 .nav-cta {
 	background: transparent !important;
-	color: rgba(255, 255, 255, 0.9) !important;
 	box-shadow: none !important;
-	padding: 0.5rem 0.75rem !important;
+	color: rgba(255, 255, 255, 0.88) !important;
 }
-
 .nav-cta:hover {
 	background: transparent !important;
-	color: var(--accent-strong) !important;
+	color: #fff !important;
 }
 
 .hero-section {
@@ -1612,22 +1596,25 @@ select {
 	}
 
 	.site-header {
-		border-radius: 0;
-		padding: 1.2rem 2rem;
-		gap: 1.5rem;
+		height: 130px;
+		padding: 0 clamp(1.5rem, 3vw, 2.5rem);
 	}
 
-	.brand-circle {
+	.brand-logo-img {
 		width: 140px;
 		height: 140px;
 	}
 
-	.brand-name {
-		font-size: 1.1rem;
+	.site-nav {
+		gap: clamp(0.85rem, 1.3vw, 1.4rem);
 	}
 
-	.site-nav {
-		gap: 1.5rem;
+	.site-nav-left  { padding-right: clamp(3rem, 7vw, 5rem); }
+	.site-nav-right { padding-left: clamp(3rem, 7vw, 5rem); }
+
+	.site-nav a {
+		padding: 0.35rem 0.75rem;
+		font-size: 0.72rem;
 	}
 
 	.dish-card {
@@ -1641,38 +1628,26 @@ select {
 	}
 
 	.site-header {
-		position: static;
+		position: relative;
 		flex-direction: column;
 		align-items: center;
-		border-radius: 0;
-		padding: 1.5rem 1rem;
-		gap: 1rem;
+		height: auto;
+		padding: 1.5rem 1rem 1rem;
+		gap: 0.75rem;
+		background: rgba(0,0,0,0.55);
 	}
 
 	.site-brand-center {
 		position: relative;
 		left: 0;
+		top: 0;
 		transform: none;
 		order: -1;
-		margin-bottom: 1rem;
 	}
 
-	.brand-circle {
-		width: 120px;
-		height: 120px;
-		border-width: 2px;
-	}
-
-	.brand-name {
-		font-size: 0.9rem;
-	}
-
-	.brand-tagline {
-		font-size: 0.65rem;
-	}
-
-	.brand-est {
-		font-size: 0.55rem;
+	.brand-logo-img {
+		width: 110px;
+		height: 110px;
 	}
 
 	.site-nav {
@@ -1684,6 +1659,7 @@ select {
 	.site-nav-left,
 	.site-nav-right {
 		flex: none;
+		padding: 0;
 	}
 
 	.site-nav a {
