@@ -7,7 +7,7 @@ import Location from "./component/location";
 import Review from "./component/review";
 import Contact from "./component/contact";
 import Footer from "./component/footer";
-import Cart from "./component/Cart";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -43,25 +43,20 @@ function App() {
   };
 
   return (
-    <main className="page-shell">
-      <Navbar />
-      <Home />
-      <div className="sections-grid">
-        <Menu onOpenCart={handleAddToCart} />
-        <PhotoGallery />
-        <Location />
-        <Review />
-        <Contact />
-      </div>
-      <Footer />
-      <Cart 
-        items={cartItems}
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(!isCartOpen)}
-        onRemoveItem={handleRemoveFromCart}
-        onUpdateQuantity={handleUpdateCartQuantity}
-      />
-    </main>
+    <CartProvider>
+      <main className="page-shell">
+        <Navbar />
+        <Home />
+        <div className="sections-grid">
+          <Menu />
+          <PhotoGallery />
+          <Location />
+          <Review />
+          <Contact />
+        </div>
+        <Footer />
+      </main>
+    </CartProvider>
   );
 }
 

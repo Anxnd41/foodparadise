@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import MenuInterface from "./menuInterface";
 import brownieImg from "../component/assets/menu/brownie.jpg";
 import dahibhalleImg from "../component/assets/menu/dahibhalle.jpg";
 import momosImg from "../component/assets/menu/momos.jpg";
 import ramenImg from "../component/assets/menu/ramen.jpg";
-import MenuModal from "./MenuModal";
+import dosaImg from "../component/assets/menu/Dosa.jpg";
+
+function Menu() {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const gridRef = useRef(null);
 
 function Menu({ onOpenCart }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,11 +30,13 @@ function Menu({ onOpenCart }) {
             <section id="menu" className="content-section">
                 <div className="menu-header">
                     <h2>Daily Specials</h2>
-                    <button className="explore-btn" onClick={() => setIsMenuOpen(true)}>
-                        Explore Menu
-                    </button>
+                    <button className="explore-btn" onClick={() => setIsMenuOpen(true)}>Explore Menu</button>
                 </div>
-                <div className="dishes-grid">
+                <div className="dishes-container">
+                    <button className="slider-btn prev-btn" onClick={prevSlide} aria-label="Previous dish">
+                        ‹
+                    </button>
+                    <div className="dishes-grid" ref={gridRef}>
                     {dishes.map((dish) => (
                         <div key={dish.id} className="dish-card">
                             <img src={dish.image} alt={dish.name} className="dish-image" />
@@ -37,13 +45,13 @@ function Menu({ onOpenCart }) {
                         </div>
                     ))}
                 </div>
+                <button className="slider-btn next-btn" onClick={nextSlide} aria-label="Next dish">
+                    ›
+                </button>
+            </div>
             </section>
             
-            <MenuModal 
-                isOpen={isMenuOpen} 
-                onClose={() => setIsMenuOpen(false)}
-                onAddToCart={handleAddToCart}
-            />
+            <MenuInterface isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
         </>
     );
 }
