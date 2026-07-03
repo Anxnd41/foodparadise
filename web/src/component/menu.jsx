@@ -4,15 +4,11 @@ import brownieImg from "../component/assets/menu/brownie.jpg";
 import dahibhalleImg from "../component/assets/menu/dahibhalle.jpg";
 import momosImg from "../component/assets/menu/momos.jpg";
 import ramenImg from "../component/assets/menu/ramen.jpg";
-import dosaImg from "../component/assets/menu/Dosa.jpg";
 
-function Menu() {
+function Menu({ onOpenCart }) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const gridRef = useRef(null);
-
-function Menu({ onOpenCart }) {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
     
     const dishes = [
         { id: 1, name: "Momos", description: "Delicious steamed dumplings filled with meat and spices", image: momosImg },
@@ -23,6 +19,14 @@ function Menu({ onOpenCart }) {
 
     const handleAddToCart = (item) => {
         onOpenCart?.(item);
+    };
+
+    const prevSlide = () => {
+        setCurrentSlide((prev) => (prev === 0 ? dishes.length - 1 : prev - 1));
+    };
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev === dishes.length - 1 ? 0 : prev + 1));
     };
 
     return (
@@ -37,18 +41,18 @@ function Menu({ onOpenCart }) {
                         ‹
                     </button>
                     <div className="dishes-grid" ref={gridRef}>
-                    {dishes.map((dish) => (
-                        <div key={dish.id} className="dish-card">
-                            <img src={dish.image} alt={dish.name} className="dish-image" />
-                            <h3>{dish.name}</h3>
-                            <p>{dish.description}</p>
-                        </div>
-                    ))}
+                        {dishes.map((dish) => (
+                            <div key={dish.id} className="dish-card">
+                                <img src={dish.image} alt={dish.name} className="dish-image" />
+                                <h3>{dish.name}</h3>
+                                <p>{dish.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <button className="slider-btn next-btn" onClick={nextSlide} aria-label="Next dish">
+                        ›
+                    </button>
                 </div>
-                <button className="slider-btn next-btn" onClick={nextSlide} aria-label="Next dish">
-                    ›
-                </button>
-            </div>
             </section>
             
             <MenuInterface isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
