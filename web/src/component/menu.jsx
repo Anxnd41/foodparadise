@@ -4,35 +4,29 @@ import brownieImg from "../component/assets/menu/brownie.jpg";
 import dahibhalleImg from "../component/assets/menu/dahibhalle.jpg";
 import momosImg from "../component/assets/menu/momos.jpg";
 import ramenImg from "../component/assets/menu/ramen.jpg";
-import dosaImg from "../component/assets/menu/Dosa.jpg";
 
-function Menu() {
+function Menu({ onOpenCart }) {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const gridRef = useRef(null);
-
+    
     const dishes = [
         { id: 1, name: "Momos", description: "Delicious steamed dumplings filled with meat and spices", image: momosImg },
         { id: 2, name: "Ramen", description: "Authentic Japanese noodle soup with rich broth", image: ramenImg },
         { id: 3, name: "Dahi Bhalle", description: "Soft lentil fritters in creamy yogurt sauce", image: dahibhalleImg },
-        { id: 4, name: "Brownie", description: "Rich, fudgy chocolate brownie dessert", image: brownieImg },
-        { id: 5, name: "Dosa", description: "Crispy South Indian crepe served with sambar and chutney", image: dosaImg }
+        { id: 4, name: "Brownie", description: "Rich, fudgy chocolate brownie dessert", image: brownieImg }
     ];
 
-    const nextSlide = () => {
-        setCurrentSlide((prev) => (prev + 1) % dishes.length);
-        if (gridRef.current) {
-            const cardWidth = 280 + 16; // card width + gap
-            gridRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        }
+    const handleAddToCart = (item) => {
+        onOpenCart?.(item);
     };
 
     const prevSlide = () => {
-        setCurrentSlide((prev) => (prev - 1 + dishes.length) % dishes.length);
-        if (gridRef.current) {
-            const cardWidth = 280 + 16; // card width + gap
-            gridRef.current.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        }
+        setCurrentSlide((prev) => (prev === 0 ? dishes.length - 1 : prev - 1));
+    };
+
+    const nextSlide = () => {
+        setCurrentSlide((prev) => (prev === dishes.length - 1 ? 0 : prev + 1));
     };
 
     return (
@@ -47,21 +41,18 @@ function Menu() {
                         ‹
                     </button>
                     <div className="dishes-grid" ref={gridRef}>
-                    {dishes.map((dish) => (
-                        <div
-                            key={dish.id}
-                            className="dish-card"
-                        >
-                            <img src={dish.image} alt={dish.name} className="dish-image" />
-                            <h3>{dish.name}</h3>
-                            <p>{dish.description}</p>
-                        </div>
-                    ))}
+                        {dishes.map((dish) => (
+                            <div key={dish.id} className="dish-card">
+                                <img src={dish.image} alt={dish.name} className="dish-image" />
+                                <h3>{dish.name}</h3>
+                                <p>{dish.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                    <button className="slider-btn next-btn" onClick={nextSlide} aria-label="Next dish">
+                        ›
+                    </button>
                 </div>
-                <button className="slider-btn next-btn" onClick={nextSlide} aria-label="Next dish">
-                    ›
-                </button>
-            </div>
             </section>
             
             <MenuInterface isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />

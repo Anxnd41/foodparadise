@@ -116,15 +116,15 @@
 
 @media (max-width: 600px) {
     .photo-gallery {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
     }
 
     .gallery-item,
     .gallery-card {
-        height: 240px;
+        height: 200px;
     }
 
     .gallery-card h2 {
-        font-size: 34px;
+        font-size: 28px;
     }
 }
