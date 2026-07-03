@@ -11,34 +11,31 @@ const outlets = [
   {
     id: 1,
     status: "open",
-    title: "15 Park Lane",
-    area: "London, WC47 2QP",
+    title: "Labour Chowk, Burari",
+    area: "Labour chowk branch",
     image: outlet1,
-    mapsQuery: "15 Park Lane London WC47 2QP",
+    mapsQuery: "The Food Paradise by Arun, Shop no 5, Vinayak Apartments, Vijay Colony, Block B, Sant Nagar, Burari Delhi, 110084",
   },
   {
     id: 2,
     status: "open",
-    title: "61 Church Road",
-    area: "London, SE92 3LF",
+    title: "Dehradun",
+    area: "Dehradun Branch",
     image: outlet2,
-    mapsQuery: "61 Church Road London SE92 3LF",
   },
   {
     id: 3,
     status: "open",
     title: "31 Main Road",
-    area: "London SW16 8DT",
+    area: "Rudrapur Branch",
     image: outlet3,
-    mapsQuery: "31 Main Road London SW16 8DT",
   },
   {
     id: 4,
     status: "open",
-    title: "88 North Street",
-    area: "London, N03 4CX",
+    title: "Gujarat",
+    area: "Gujarat Branch",
     image: outlet4,
-    mapsQuery: "88 North Street London N03 4CX",
   },
   {
     id: 5,
@@ -63,4 +60,4 @@ const outlets = [
   },
 ];
 
-export default outlets;
+export default outlets;
