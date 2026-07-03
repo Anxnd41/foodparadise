@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Navbar from "./component/navbar";
+import MobileMenu from "./component/MobileMenu";
 import Home from "./component/home";
 import Menu from "./component/menu";
 import PhotoGallery from "./component/photoGallery";
@@ -12,6 +13,7 @@ import { CartProvider } from "./context/CartContext";
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleAddToCart = (item) => {
     setCartItems((prevItems) => {
@@ -46,6 +48,7 @@ function App() {
     <CartProvider>
       <main className="page-shell">
         <Navbar />
+        <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
         <Home />
         <div className="sections-grid">
           <Menu />

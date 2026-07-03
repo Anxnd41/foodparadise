@@ -1,12 +1,11 @@
 import "./mobile-menu.css";
 
-function MobileMenu({ isOpen, onClose }) {
+function MobileMenu({ isOpen, onClose, onToggle }) {
   const menuItems = [
     { name: "HOME", href: "#home" },
-    { name: "HISTORY", href: "#history" },
-    { name: "GRILLS", href: "#menu" },
-    { name: "WINES", href: "#wines" },
-    { name: "EVENTS", href: "#events" },
+    { name: "MENU", href: "#menu" },
+    { name: "GALLERY", href: "#gallery" },
+    { name: "LOCATION", href: "#location" },
     { name: "CONTACT", href: "#contact" },
   ];
 
@@ -22,7 +21,7 @@ function MobileMenu({ isOpen, onClose }) {
       {/* Hamburger Icon */}
       <button
         className={`mobile-menu-toggle ${isOpen ? "active" : ""}`}
-        onClick={onClose}
+        onClick={onToggle}
         aria-label="Toggle menu"
       >
         <span></span>
