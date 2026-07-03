@@ -1,8 +1,16 @@
+
+import { useState } from "react";
 import { useState, useRef } from "react";
 import brownieImg from "../component/assets/menu/brownie.jpg";
 import dahibhalleImg from "../component/assets/menu/dahibhalle.jpg";
 import momosImg from "../component/assets/menu/momos.jpg";
 import ramenImg from "../component/assets/menu/ramen.jpg";
+import MenuModal from "./MenuModal";
+
+function Menu({ onOpenCart }) {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
+
 import dosaImg from "../component/assets/menu/Dosa.jpg";
 
 function Menu() {
@@ -17,6 +25,22 @@ function Menu() {
         { id: 5, name: "Dosa", description: "Crispy South Indian crepe served with sambar and chutney", image: dosaImg }
     ];
 
+    const handleAddToCart = (item) => {
+        onOpenCart?.(item);
+    };
+
+    return (
+        <>
+            <section id="menu" className="content-section">
+                <div className="menu-header">
+                    <h2>Daily Specials</h2>
+                    <button className="explore-btn" onClick={() => setIsMenuOpen(true)}>
+                        Explore Menu
+                    </button>
+                </div>
+                <div className="dishes-grid">
+                    {dishes.map((dish) => (
+                        <div key={dish.id} className="dish-card">
     const nextSlide = () => {
         setCurrentSlide((prev) => (prev + 1) % dishes.length);
         if (gridRef.current) {
@@ -55,6 +79,14 @@ function Menu() {
                         </div>
                     ))}
                 </div>
+            </section>
+            
+            <MenuModal 
+                isOpen={isMenuOpen} 
+                onClose={() => setIsMenuOpen(false)}
+                onAddToCart={handleAddToCart}
+            />
+        </>
                 <button className="slider-btn next-btn" onClick={nextSlide} aria-label="Next dish">
                     ›
                 </button>
