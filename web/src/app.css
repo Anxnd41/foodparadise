@@ -378,6 +378,8 @@ select {
 	background: #faf6f0;
 	box-shadow: none;
 	backdrop-filter: none;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 
 .content-section h2 {
@@ -438,24 +440,97 @@ select {
 	overflow-x: auto;
 	scroll-behavior: smooth;
 	padding: 0.5rem 0;
+	position: relative;
+	min-height: auto;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex: 1;
+	scroll-snap-type: x mandatory;
+	max-width: calc(100vw - 120px);
+	width: 100%;
+}
+
+/* Container for dishes and side arrow buttons */
+.dishes-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+	margin-top: 1rem;
+	position: relative;
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
 }
 
 .dishes-grid::-webkit-scrollbar {
-	height: 6px;
+	height: 0;
 }
 
 .dishes-grid::-webkit-scrollbar-track {
-	background: rgba(0, 0, 0, 0.05);
-	border-radius: 999px;
+	background: transparent;
 }
 
 .dishes-grid::-webkit-scrollbar-thumb {
-	background: rgba(194, 75, 26, 0.3);
-	border-radius: 999px;
+	background: transparent;
 }
 
 .dishes-grid::-webkit-scrollbar-thumb:hover {
-	background: rgba(194, 75, 26, 0.5);
+	background: transparent;
+}
+
+/* Slider buttons positioned on sides */
+.slider-btn {
+	background: var(--accent);
+	color: white;
+	border: none;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	font-size: 1.8rem;
+	cursor: pointer;
+	transition: background 0.3s ease, transform 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	flex-shrink: 0;
+	line-height: 1;
+	z-index: 10;
+}
+
+.slider-btn:hover {
+	background: var(--accent-strong);
+	transform: scale(1.1);
+}
+
+/* Dots container below */
+.slider-controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin-top: 1.5rem;
+	width: 100%;
+}
+
+.slider-dots-container {
+	display: none;
+}
+
+.slider-dots {
+	display: none;
+	gap: 0.6rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.dot {
+	display: none;
+}
+
+.dot.active {
+	display: none;
 }
 
 .dish-card {
@@ -464,12 +539,21 @@ select {
 	background: rgba(255, 255, 255, 0.2);
 	border: 1px solid rgba(194, 75, 26, 0.15);
 	transition: all 0.3s ease;
+	position: relative;
+	opacity: 1;
+	pointer-events: auto;
 	flex: 0 0 calc(25% - 0.75rem);
 	min-width: 260px;
 	max-width: 280px;
 	display: flex;
 	flex-direction: column;
 	backdrop-filter: blur(8px);
+	scroll-snap-align: start;
+}
+
+.dish-card.active {
+	opacity: 1;
+	pointer-events: auto;
 }
 
 .dish-card:hover {
@@ -502,6 +586,7 @@ select {
 
 #menu {
 	grid-column: 1 / -1;
+	position: relative;
 }
 
 #gallery {
@@ -514,7 +599,6 @@ select {
 	border: none !important;
 	box-shadow: none !important;
 	padding: 3rem 0 !important;
-	margin-top: 2rem;
 	background-attachment: scroll !important;
 	background-image: none !important;
 }
@@ -1807,17 +1891,62 @@ select {
 	}
 
 	.dishes-grid {
-		flex-direction: column;
+		flex-direction: row;
 		gap: 0.75rem;
+		overflow-x: auto;
+		position: relative;
+		min-height: auto;
+		align-items: flex-start;
+		justify-content: flex-start;
+		scroll-snap-type: x mandatory;
+	}
+
+	.dishes-container {
+		flex-direction: row;
+		gap: 0.75rem;
+		margin-top: 1rem;
+		align-items: center;
 	}
 
 	.dish-card {
-		flex: 0 0 100%;
-		min-width: 100%;
+		flex: 0 0 calc(100% - 0.75rem);
+		min-width: calc(100% - 0.75rem);
+		position: relative;
+		opacity: 1;
+		transition: all 0.3s ease;
+		pointer-events: auto;
+		scroll-snap-align: start;
 	}
 
 	.dish-image {
 		height: 180px;
+	}
+
+	/* Slider controls for mobile - hide arrow buttons */
+	.slider-btn {
+		display: none;
+	}
+
+	.slider-controls {
+		display: none;
+		justify-content: center;
+		gap: 1rem;
+		margin-top: 1rem;
+		width: 100%;
+	}
+
+	.slider-dots {
+		gap: 0.5rem;
+	}
+
+	.dot {
+		width: 8px;
+		height: 8px;
+	}
+
+	.dot.active {
+		width: 12px;
+		height: 12px;
 	}
 
 	/* Hero section */
