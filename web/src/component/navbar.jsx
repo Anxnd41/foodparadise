@@ -1,3 +1,5 @@
+import logo from "./assets/logo/image.jpeg";
+
 function Navbar() {
   return (
     <header className="site-header">
@@ -10,13 +12,13 @@ function Navbar() {
 
       {/* ── Centred logo ── */}
       <div className="site-brand-center">
-        <div className="brand-circle">
-          <div className="brand-text">
-            <span className="brand-name">FOOD PARADISE</span>
-            <span className="brand-tagline">Grills & Wine Bar</span>
-            <span className="brand-est">EST. 2024</span>
-          </div>
-        </div>
+        <a href="#home" className="brand-logo-link" aria-label="Food Paradise – Home">
+          <img
+            src={logo}
+            alt="Food Paradise logo"
+            className="brand-logo-img"
+          />
+        </a>
       </div>
 
       {/* ── Right nav ── */}
