@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import MenuInterface from "./menuInterface";
 import brownieImg from "../component/assets/menu/brownie.jpg";
 import dahibhalleImg from "../component/assets/menu/dahibhalle.jpg";
 import momosImg from "../component/assets/menu/momos.jpg";
@@ -7,6 +8,7 @@ import dosaImg from "../component/assets/menu/Dosa.jpg";
 
 function Menu() {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const gridRef = useRef(null);
 
     const dishes = [
@@ -34,16 +36,17 @@ function Menu() {
     };
 
     return (
-        <section id="menu" className="content-section">
-            <div className="menu-header">
-                <h2>Daily Specials</h2>
-                <button className="explore-btn">Explore Menu</button>
-            </div>
-            <div className="dishes-container">
-                <button className="slider-btn prev-btn" onClick={prevSlide} aria-label="Previous dish">
-                    ‹
-                </button>
-                <div className="dishes-grid" ref={gridRef}>
+        <>
+            <section id="menu" className="content-section">
+                <div className="menu-header">
+                    <h2>Daily Specials</h2>
+                    <button className="explore-btn" onClick={() => setIsMenuOpen(true)}>Explore Menu</button>
+                </div>
+                <div className="dishes-container">
+                    <button className="slider-btn prev-btn" onClick={prevSlide} aria-label="Previous dish">
+                        ‹
+                    </button>
+                    <div className="dishes-grid" ref={gridRef}>
                     {dishes.map((dish) => (
                         <div
                             key={dish.id}
@@ -59,7 +62,10 @@ function Menu() {
                     ›
                 </button>
             </div>
-        </section>
+            </section>
+            
+            <MenuInterface isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+        </>
     );
 }
 

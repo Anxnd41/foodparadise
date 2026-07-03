@@ -6,21 +6,24 @@ import Location from "./component/location";
 import Review from "./component/review";
 import Contact from "./component/contact";
 import Footer from "./component/footer";
+import { CartProvider } from "./context/CartContext";
 
 function App() {
   return (
-    <main className="page-shell">
-      <Navbar />
-      <Home />
-      <div className="sections-grid">
-        <Menu />
-        <PhotoGallery />
-        <Location />
-        <Review />
-        <Contact />
-      </div>
-      <Footer />
-    </main>
+    <CartProvider>
+      <main className="page-shell">
+        <Navbar />
+        <Home />
+        <div className="sections-grid">
+          <Menu />
+          <PhotoGallery />
+          <Location />
+          <Review />
+          <Contact />
+        </div>
+        <Footer />
+      </main>
+    </CartProvider>
   );
 }
 
