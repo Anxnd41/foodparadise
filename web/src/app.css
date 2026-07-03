@@ -57,9 +57,9 @@ select {
 .page-shell {
 	width: 100%;
 	margin: 0;
-	padding: 1.25rem 1rem 3.5rem;
+	padding: 0 1rem 3.5rem;
 	display: grid;
-	gap: 1rem;
+	gap: 0;
 	max-width: none;
 }
 
@@ -93,11 +93,39 @@ select {
 	padding: 0;
 }
 
-.brand-circle {
-	width: 150px;
-	height: 150px;
+.brand-logo-link {
+	display: block;
+	line-height: 0;
+	transition: transform 0.3s ease;
+	width: 160px;
+	height: 160px;
 	border-radius: 50%;
-	border: 3px dotted rgba(255, 255, 255, 0.8);
+}
+
+.brand-logo-link:hover {
+	transform: scale(1.05);
+}
+
+.brand-logo-img {
+	width: 160px;
+	height: 160px;
+	object-fit: contain;
+	border-radius: 50%;
+	border: none;
+	padding: 0;
+	background: transparent;
+	transition: opacity 0.3s ease;
+}
+
+.brand-logo-link:hover .brand-logo-img {
+	opacity: 0.9;
+}
+
+.brand-circle {
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	border: none;
 	background: transparent;
 	backdrop-filter: none;
 	display: flex;
@@ -338,29 +366,30 @@ select {
 .sections-grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 1rem;
+	gap: 0;
 }
 
 .content-section,
 .site-footer {
 	grid-column: span 1;
 	padding: 1.3rem;
-	border-radius: 24px;
-	border: 1px solid var(--border);
-	background: rgba(255, 255, 255, 0.2);
+	border-radius: 0;
+	border: none;
+	background: #faf6f0;
 	box-shadow: none;
-	backdrop-filter: blur(8px);
+	backdrop-filter: none;
 }
 
 .content-section h2 {
 	margin: 0 0 0.75rem;
 	font-size: 1.2rem;
 	letter-spacing: -0.03em;
+	color: var(--text);
 }
 
 .content-section p,
 .content-section li {
-	color: var(--muted);
+	color: var(--text);
 	line-height: 1.7;
 }
 
@@ -431,7 +460,7 @@ select {
 
 .dish-card {
 	padding: 1rem;
-	border-radius: 16px;
+	border-radius: 0;
 	background: rgba(255, 255, 255, 0.2);
 	border: 1px solid rgba(194, 75, 26, 0.15);
 	transition: all 0.3s ease;
@@ -502,7 +531,7 @@ select {
 #location,
 .loc-section {
 	grid-column: 1 / -1;
-	background: #faf6f0 !important;
+	background: #f9f4eb !important;
 	padding: 3rem 0;
 	background-attachment: scroll !important;
 	background-image: none !important;
@@ -1643,8 +1672,16 @@ select {
 	}
 
 	.brand-circle {
-		width: 120px;
-		height: 120px;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 3px dotted rgba(255, 255, 255, 0.8);
+	background: transparent;
+	backdrop-filter: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: none;
 	}
 
 	.site-nav {
